@@ -91,8 +91,8 @@ class docker::params {
             $service_provider        = 'upstart'
             $service_hasstatus       = true
             $service_hasrestart      = false
+            $service_overrides_template = undef
           }
-          $service_overrides_template = undef
         }
         default: {
           $package_release = "debian-${::lsbdistcodename}"
