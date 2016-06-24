@@ -79,11 +79,12 @@ class docker::params {
         'Ubuntu' : {
           $package_release = "ubuntu-${::lsbdistcodename}"
           if (versioncmp($::operatingsystemrelease, '15.04') >= 0) {
-            $service_provider        = 'systemd'
-            $storage_config          = '/etc/default/docker-storage'
-            $service_config_template = 'docker/etc/sysconfig/docker.systemd.erb'
-            $service_hasstatus       = true
-            $service_hasrestart      = true
+            $service_provider           = 'systemd'
+            $storage_config             = '/etc/default/docker-storage'
+            $service_config_template    = 'docker/etc/sysconfig/docker.systemd.erb'
+            $service_overrides_template = 'docker/etc/systemd/system/docker.service.d/service-overrides-debian.conf.erb'
+            $service_hasstatus          = true
+            $service_hasrestart         = true
             include docker::systemd_reload
           } else {
             $service_config_template = 'docker/etc/default/docker.erb'
@@ -99,8 +100,8 @@ class docker::params {
             $storage_config             = '/etc/default/docker-storage'
             $service_config_template    = 'docker/etc/sysconfig/docker.systemd.erb'
             $service_overrides_template = 'docker/etc/systemd/system/docker.service.d/service-overrides-debian.conf.erb'
-            $service_hasstatus       = true
-            $service_hasrestart      = true
+            $service_hasstatus          = true
+            $service_hasrestart         = true
             include docker::systemd_reload
           } else {
             $service_config_template = 'docker/etc/default/docker.erb'
